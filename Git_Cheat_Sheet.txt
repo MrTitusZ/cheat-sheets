@@ -1,0 +1,30 @@
+---- Git configurations ----
+git config --global user.name "FirstName LastName"			- ezen a gépen minden projektnél ez lesz a username
+git config --global user.email "your-email@email-provider.com"		- ezen a gépen ez lesz az alapértelmezett e-mail cím minden projektnél
+git config --global color.ui true					- ezen a gépen engedélyezi a git parancsok színezését
+git config --list							- az összes globális Git konfigurációs beállítás megjelenítése
+
+---- Git starting a repo ----
+git init								- inicializálja, vagy re-inicializálja a git munkakönyvtárat egy projektben
+git status								- a git munkakönyvtár állapotát írja le
+
+---- Git staging files ----
+git add <file-name>							- egy adott fájlt hozzáad a "staging area"-hoz
+git add <file-name> <another-file-name> <yet-another-file-name>		- több fájlt az hozzá a "staging area"-hoz
+git add .								- a projektmappában minden változást hozzáad a "staging area"-hoz a .gitignore-ban megadott fájlok kivételével, de mondjuk az új mappákat nem, csak akkor ha abból a mappából is meghívjuk
+git add --all								- a projektmappából MINDEN változást hozzáad a "staging area"-hoz, még az új mappákat is (a .gitignore-ban levő fájlok kivételével)
+git add -A								- a 'git add --all' rövidített formája
+git rm --cached <file-name>						- a staging area-ból eltávolít egy fájlt és nem fogjuk követni az azzal kapcsolatos változásokat
+git rm <file-name>							- nemcsak a  staging area-ból, hanem a fájlrendszerből is törli a megadott fájlt
+git reset <file-name>							- a megadott fájlt visszaállítja az előző commit-ban elmentett állapotára és a staging area-ból eltávolítja az új verziót, ha már hozzáadtuk
+
+---- Git commiting ot a repository ----
+git commit -m "Add these three files"					- commit-eli a staging area tartalmát a megadott üzenettel
+git reset --soft HEAD^							- HEAD^ - az utolsó commit előtti állapotra térsz vissza, --soft - a munkakönyvtárat és a staging area-t érintetlenül hagyja, de az utolsó commit-ot visszavonja
+git commit --amend -m <enter your message>				- az utolsó commit-ot egészíti ki, mintha alapból is a kiegészítve commit-oltad volna
+
+---- Git pulling and pushing from and to repositories ----
+git remote add origin <link>						- a lokál git repo-t hozzáköti a <link>-en található repo-hoz. Az 'origin' egy tetszőlegesen választható név. Több online repo-hoz is hozzáköthetjük a helyi repo-t, ilyenkor mindegyiknek más nevet kell adni, pl.: 'origin', 'secondary', stb.
+git push -u origin master						- a helyi 'master' ágat tolja fel az 'origin' repo-ba. A '-u' a '--set-upstream' rövidítése, ha utána használjuk a 'git push' és 'git pull' utasításokat, akkor ugyanazt a branch-et (master) push-olhatjuk, ugyanarra a repo-ba (origin)
+git clone <URL>							- távoli repo-t másol a gépre
+git pull							- lehúzza a repo távoli változatát és egyesíti a gépen tárolt repo-val
